@@ -1,6 +1,6 @@
 // Author: Dre Harm
 // Date: 10/24/26
-// Note: If I'm understanging it right, 
+// Note: If I'm understanding it right, 
 // I think the view should only be touching the DOM tree and shouldn't change the state itself, 
 // so it reads stuff from the model and reflects those changes
 
@@ -21,4 +21,9 @@ class ForumView {
       btn.classList.toggle('active', btn.dataset.page === model.activePage);
     }
   }
+
+  clearForm() {
+    this.form.reset();
+  }
+  
 }

@@ -4,7 +4,7 @@
 
 class ForumController {
 
-  // Iyengars diagram had arrows from model and view going to controller so I'm doing that here
+  // Iyengar's diagram had arrows from model and view going to controller so I'm doing that here
   constructor(model, view) { 
     this.model = model;
     this.view = view;
@@ -30,13 +30,10 @@ class ForumController {
     // if the user clicks on the submit button the login popup opens
     this.view.form.addEventListener('submit', (e) => {
       e.preventDefault();
+      this.view.clearForm();
       this.model.closeModal();
     });
   }
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-  const model = new ForumModel();
-  const view = new ForumView();
-  new ForumController(model, view);
-});
+document.addEventListener('DOMContentLoaded', () => new ForumController(new ForumModel(), new ForumView()));

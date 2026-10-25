@@ -4,7 +4,7 @@
 
 class ForumModel {
   constructor() {
-    this.modalOpen = false; // the login modal needs to start closed
+    this.activeModal = null; // we don't want anything shown on startup to null works, 'login' and 'signup' show their respective popups
     this.activePage = 'home'; // home is the default nav button
     this.listeners = []; // holds our callbacks
   }
@@ -22,14 +22,14 @@ class ForumModel {
   }
 
   // sets the modal to visible then refreshes the screen
-  openModal() {
-    this.modalOpen = true;
+  openModal(name) {
+    this.activeModal = name;
     this.notify();
   }
 
   // sets the modal to not visible then refreshes the screen
   closeModal() {
-    this.modalOpen = false;
+    this.activeModal = null;
     this.notify();
   }
 }

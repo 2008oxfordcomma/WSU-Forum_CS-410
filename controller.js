@@ -17,20 +17,37 @@ class ForumController {
   bindEvents() {
     // if the user clicks on the login button the login popup opens
     this.view.loginBtn.addEventListener('click', () => {
-      this.model.openModal();
+      this.model.openModal('login');
     });
 
+    this.view.signupLink.addEventListener('click', (e) => {
+        e.preventDefault();
+        this.model.openModal('signup');
+    })
+
     // we essentially check if the user clicks outside of the model and if so, close it
-    this.view.modal.addEventListener('click', (e) => {
-      if (e.target === this.view.modal) {
+    this.view.loginModal.addEventListener('click', (e) => {
+      if (e.target === this.view.loginModal) {
+        this.model.closeModal();
+      }
+    });
+
+    this.view.signupModal.addEventListener('click', (e) => {
+      if (e.target === this.view.signupModal) {
         this.model.closeModal();
       }
     });
 
     // if the user clicks on the submit button the login popup opens
-    this.view.form.addEventListener('submit', (e) => {
+    this.view.loginForm.addEventListener('submit', (e) => {
       e.preventDefault();
-      this.view.clearForm();
+      this.view.clearLoginForm();
+      this.model.closeModal();
+    });
+
+    this.view.signupForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      this.view.clearSignupForm();
       this.model.closeModal();
     });
   }

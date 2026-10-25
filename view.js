@@ -6,15 +6,19 @@
 
 class ForumView {
   constructor() {
-    this.modal = document.getElementById('loginModal');
+    this.loginModal = document.getElementById('loginModal');
     this.loginBtn = document.getElementById('loginBtn');
+    this.loginForm = document.getElementById('loginForm');
+    this.signupModal = document.getElementById('signupModal');
+    this.signupLink = document.getElementById('signupLink');
+    this.signupForm = document.getElementById('signupForm');
     this.navBtns = document.querySelectorAll('.nav-btn[data-page]');
-    this.form = document.getElementById('loginForm');
   }
   
 
   render(model) {
-    this.modal.classList.toggle('open', model.modalOpen);
+    this.loginModal.classList.toggle('open', model.activeModal === 'login');
+    this.signupModal.classList.toggle('open', model.activeModal === 'signup');
 
     for (let i = 0; i < this.navBtns.length; i++) {
       const btn = this.navBtns[i];
@@ -22,8 +26,12 @@ class ForumView {
     }
   }
 
-  clearForm() {
-    this.form.reset();
+  clearLoginForm() {
+    this.loginForm.reset();
+  }
+
+  clearSignupForm() {
+    this.signupForm.reset();
   }
   
 }

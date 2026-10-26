@@ -165,6 +165,28 @@ button {
   font-size: 14px;
 }
 
+.form-row-split {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.role-label {
+    display: block;
+    font-size: 14px;
+}
+
+.role-options {
+    display: flex;
+    gap: 1rem;
+    font-size: 14px;
+}
+
+.role-option {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
 .remember-me {
   display: flex;
   align-items: center;

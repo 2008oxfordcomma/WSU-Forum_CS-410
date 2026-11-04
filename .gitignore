@@ -48,3 +48,6 @@ Desktop.ini
 .env.test.local
 .env.production.local
 *.pem
+
+# Personal files
+erdlab.txt

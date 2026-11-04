@@ -10,8 +10,8 @@
 $host = $_ENV['DB_HOST'];
 $port = $_ENV['DB_PORT'];
 $db = $_ENV['DB_NAME'];
-$user = $_ENV['USER'];
-$pass = $_ENV['PASSWORD'];
+$user = $_ENV['DB_USER'];
+$pass = $_ENV['DB_PASSWORD'];
 $charset = 'utf8mb4';
 
 // Establish the data source name

@@ -240,3 +240,78 @@ button {
 .signup-prompt a:hover {
   text-decoration: underline;
 }
+
+/* Note: I did use some of style tags from W3 Schools for the scroll bars handling of components - Dre */
+
+.landing {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding: 0; 
+}
+
+.top-section {
+  position: relative;
+  min-height: 420px;
+  border-bottom: 2px solid var(--border-color);
+}
+
+.bg-image {
+  position: absolute;
+  inset: 0;
+  background: #e5e7eb;
+}
+
+.groups-section {
+  padding: 0 3.5rem 2rem;
+}
+
+.groups-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.groups-title,
+.groups-view-all {
+  border: 2px solid var(--border-color);
+  background: white;
+  Text-align: center;
+  Padding: 0.5rem;
+}
+
+.group-scroller {
+  display: flex;
+  gap: 1.5rem;
+  overflow-x: auto;
+  padding: 1rem;
+  border: 2px solid var(--border-color);
+  background: white;
+}
+
+.group-card {
+  flex: 0 0 240px;
+  height: 300px;
+  scroll-snap-align: start;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 1.25rem;
+  border: 2px solid var(--border-color);
+  background: white;
+}
+
+.group-icon,
+.group-name,
+.group-members,
+.group-tag {
+  border: 2px solid var(--border-color);
+  background: white;
+}
+
+.group-icon    { width: 100px; height: 100px; margin-bottom: 0.5rem; }
+.group-tag     { height: 25px; margin-top: auto; }
+
+.group-name,
+.group-members { height: 25px; }

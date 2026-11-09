@@ -13,7 +13,6 @@
     <link rel="stylesheet" href="Styles/styles.css">
     <link rel="stylesheet" href="Styles/home.css">
 </head>
-
 <body>
     <nav class="navbar">
         <div class="container">
@@ -32,7 +31,7 @@
             </div>
         </div>
     </nav>
-    <main class="main-content landing">
+    <main id="guestPage" class="main-content landing" hidden>
         <section class="top-section">
             <div class="bg-image"></div> 
             <!-- We'll need to add a bunch of div's or parapraphs for the text, 
@@ -53,9 +52,25 @@
                 </div>
             </div>
         </section>
-
     </main>
-
+    <main id="homePage" class="main-content home-layout" >
+        <aside class="home-left">
+            <section class="home-panel">
+                <div id="profileCard"></div>
+                <nav id="sidebarNav"></nav>
+            </section>
+            <section id="myGroupsPanel" class="home-panel"></section>
+        </aside>
+        <div class="home-center">
+            <section id="postSimpleMessage" class="home-panel"></section>
+            <section id="feedHeader"></section>
+            <section id="postFeed"></section>
+        </div>
+        <aside class="home-right">
+            <section id="quickLinksPanel" class="home-panel"></section>
+            <section id="trendingGroupsPanel" class="home-panel"></section>
+        </aside>
+    </main>
     <!-- Our popups/modals can go here just to keep things organized -->
     <div id="loginModal" class="modal">
         <div class="modal-content">
@@ -83,7 +98,6 @@
             </div>
         </div>
     </div>
-
     <div id="signupModal" class="modal">
         <div class="modal-content">
             <div class="login-body">
@@ -126,13 +140,11 @@
             </div>
         </div>
     </div>
-
     <!-- If we need to add more JS files or want to break this up more we can but I'm just planning out the MVC -->
-    <script src="../Model/model.js"></script>
-    <script src="view.js"></script>
-    <script src="homeView.js"></script>
-    <script src="../Controller/controller.js"></script>
-
+    <script type="module" src="../Model/ForumModel.js"></script>
+    <script type="module" src="ForumView.js"></script>
+    <script type="module" src="HomeView.js"></script>
+    <script type="module" src="../Controller/ForumController.js"></script>
+    <script type="module" src="../Controller/HomeController.js"></script>
 </body>
-
 </html>

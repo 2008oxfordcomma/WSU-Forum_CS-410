@@ -1,0 +1,45 @@
+/* Author: Dre Harm
+ * Date: 11/8/26
+*/
+ 
+.home-layout {
+    display: grid;
+    grid-template-columns: 260px minmax(0, 1fr) 280px;
+    grid-template-rows: minmax(0, 1fr);
+    gap: 1.5rem;
+    max-width: 1280px;
+}
+ 
+.home-left,
+.home-center,
+.home-right {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    min-height: 0;
+}
+ 
+.home-left,
+.home-right {
+    overflow-y: auto;
+}
+ 
+.home-left>*,
+.home-right>*,
+#postSimpleMessage,
+#feedHeader {
+    flex: none;
+}
+ 
+#postFeed {
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    padding-right: 0.5rem;
+}
+ 
+.home-panel {
+    border: 2px solid var(--border-color);
+    background: white;
+    padding: 1.25rem;
+}

@@ -23,15 +23,25 @@ body {
   background: white;
   color: var(--text-primary);
   font-family: BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  height: 100vh;
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
 }
 
 button {
   cursor: pointer;
 }
 
+[hidden] {
+  display: none !important;
+}
+
 .navbar {
   border-bottom: 2px solid var(--border-color);
   background: white;
+  flex: none;
 }
 
 .container {
@@ -43,7 +53,8 @@ button {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 64px;
+  min-height: 64px;
+  padding: 0.5rem 0;
   gap: 1rem;
   flex-wrap: wrap;
 }
@@ -88,7 +99,10 @@ button {
 .main-content {
   margin: 0 auto;
   padding: 1.5rem;
-  min-height: calc(100vh - 64px - 2rem);
+  width: 100%;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
 }
 
 .modal {
@@ -252,7 +266,8 @@ button {
 
 .top-section {
   position: relative;
-  min-height: 420px;
+  flex: 1;
+  min-height: 0;
   border-bottom: 2px solid var(--border-color);
 }
 
@@ -264,6 +279,7 @@ button {
 
 .groups-section {
   padding: 0 3.5rem 2rem;
+  flex: none;
 }
 
 .groups-header {
@@ -311,12 +327,17 @@ button {
 }
 
 .group-icon {
-  width: 100px; height: 100px; margin-bottom: 0.5rem;
+  width: 100px; 
+  height: 100px; 
+  margin-bottom: 0.5rem;
 }
 
 .group-tag { 
-  height: 25px; margin-top: auto; 
+  height: 25px; 
+  margin-top: auto; 
 }
 
 .group-name,
-.group-members { height: 25px; }
+.group-members { 
+  height: 25px; 
+}

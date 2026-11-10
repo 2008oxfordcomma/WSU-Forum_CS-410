@@ -6,8 +6,9 @@
 
 import ForumViewInterface from './ForumViewInterface.js'
 
-class ForumView extends ForumViewInterface {
+export default class ForumView extends ForumViewInterface {
   constructor() {
+    super();
     this.loginModal = document.getElementById('loginModal');
     this.loginBtn = document.getElementById('loginBtn');
     this.loginForm = document.getElementById('loginForm');

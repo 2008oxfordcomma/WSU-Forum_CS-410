@@ -4,8 +4,9 @@
 
 import ForumModelInterface from './ForumModelInterface.js'
 
-class ForumModel extends ForumModelInterface {
+export default class ForumModel extends ForumModelInterface {
   constructor() {
+    super()
     this.activeModal = null; // we don't want anything shown on startup to null works, 'login' and 'signup' show their respective popups
     this.activePage = 'home'; // home is the default nav button
     this.listeners = []; // holds our callbacks

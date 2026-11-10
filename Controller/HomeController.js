@@ -3,9 +3,9 @@
 
 import HomeControllerInterface from './HomeControllerInterface.js'
 
-class HomeController extends HomeControllerInterface {
+export default class HomeController extends HomeControllerInterface {
     constructor(model, homeView) {
-
+        super();
     }
 
     bindEvents() {

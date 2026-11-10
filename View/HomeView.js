@@ -3,9 +3,9 @@
 
 import HomeViewInterface from './HomeViewInterface.js'
 
-class HomeView extends HomeViewInterface {
+export default class HomeView extends HomeViewInterface {
     constructor() {
-
+        super();
     }
 
     render(model) {
@@ -16,18 +16,22 @@ class HomeView extends HomeViewInterface {
 
     }
 
+    // the name is kind of self explanatory but 
     renderSideNavBar(item, activeId) {
 
     }
 
+    // My Groups panel in the left column
     renderMyGroups(groups) {
 
     }
 
+    // one of the row in the My Groups list
     groupRow(group) {
 
     }
 
+    // This is the what's on you mind box from Benjamin's mockup, the controller should listen for the form's submit event
     renderSimpleMessage(user) {
 
     }

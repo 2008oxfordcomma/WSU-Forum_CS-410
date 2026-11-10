@@ -3,11 +3,14 @@
 // Turns the user events into model calls
 
 import ForumControllerInterface from './ForumControllerInterface.js'
+import ForumModel from '../Model/ForumModel.js'
+import ForumView from '../View/ForumView.js'
 
 class ForumController extends ForumControllerInterface{
 
   // Iyengar's diagram had arrows from model and view going to controller so I'm doing that here
   constructor(model, view) { 
+    super();
     this.model = model;
     this.view = view;
 

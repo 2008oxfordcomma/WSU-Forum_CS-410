@@ -18,8 +18,8 @@ USE warrior_chat_db;
 -- Will need to decide how to support different roles (Student, Professor, Admin)
 CREATE TABLE IF NOT EXISTS users (
     id INT PRIMARY KEY AUTOINCREMENT,
-    fname VARCHAR(30),  -- Will be derived from email
-    lname VARCHAR(30),  -- Will be derived from email
+    fname VARCHAR(30),
+    lname VARCHAR(30),
     email VARCHAR(50) NOT NULL,
     password VARCHAR(50) NOT NULL
 

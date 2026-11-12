@@ -27,6 +27,7 @@
                     <button class="nav-btn" data-page="groups">Groups</button>
                     <button class="nav-btn" data-page="about">About</button>
                 </div>
+                <span id="greeting" class="nav-greeting" hidden></span>
                 <button class="nav-btn login-btn" id="loginBtn">Login / Create Account</button>
             </div>
         </div>
@@ -53,7 +54,7 @@
             </div>
         </section>
     </main>
-    <main id="homePage" class="main-content home-layout" >
+    <main id="homePage" class="main-content home-layout" hidden>
         <aside class="home-left">
             <section class="home-panel">
                 <div id="profileCard"></div>
@@ -92,7 +93,8 @@
                         </label>
                         <a href="#" class="forgot-link">Forgot Password?</a> <!-- this will eventually link to something -->
                     </div>
-                    <button type="submit" class="submit-btn">Login</button>
+                    <p id="loginError" class="form-error" hidden></p>
+                    <button type="submit" class="submit-btn" id="loginSubmit">Login</button>
                 </form>
                 <p class="signup-prompt">Don't have an account? <a href="#" id="signupLink">Sign Up</a></p> <!-- this will eventually link to the create account page -->
             </div>
@@ -135,7 +137,8 @@
                         <input type="password" id="signupConfirmPassword" placeholder="Confirm Password" required>
                     </div>
                     
-                    <button type="submit" class="submit-btn">Create Account</button>
+                    <p id="signupError" class="form-error" hidden></p>
+                    <button type="submit" class="submit-btn" id="signupSubmit">Create Account</button>
                 </form>
             </div>
         </div>

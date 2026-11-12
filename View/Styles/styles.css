@@ -341,3 +341,21 @@ button {
 .group-members { 
   height: 25px; 
 }
+
+.form-error {
+  color: #b91c1c;
+  font-size: 14px;
+  margin-bottom: 1rem;
+}
+
+.submit-btn:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+
+.nav-greeting {
+  font-size: 14px;
+  font-weight: 500;
+  margin-left: auto;
+  margin-right: 0.75rem;
+}

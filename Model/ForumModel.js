@@ -10,6 +10,10 @@ export default class ForumModel extends ForumModelInterface {
     this.activeModal = null; // we don't want anything shown on startup to null works, 'login' and 'signup' show their respective popups
     this.activePage = 'home'; // home is the default nav button
     this.listeners = []; // holds our callbacks
+    this.currentUser = null;
+    this.sessionChecked = false;
+    this.authError = null;
+    this.authPending = false;
   }
 
   // if I'm understanding Iyengar correctly, the model shouldn't need to know who is watching, 
@@ -27,31 +31,86 @@ export default class ForumModel extends ForumModelInterface {
   // sets the modal to visible then refreshes the screen
   openModal(name) {
     this.activeModal = name;
+    this.authError = null;
     this.notify();
   }
 
   // sets the modal to not visible then refreshes the screen
   closeModal() {
     this.activeModal = null;
+    this.authError = null;
     this.notify();
   }
 
-  // I wanted to add some stuff for a mock login if I had time
-
   isLoggedIn() {
-
+    return this.currentUser !== null;
   }
 
-  login({email}) {
+  async request(file, method, body) {
+    // because we have different pages and I couldn't figure out how to pass things properly, 
+    // import.meta.url is this file's own address, so now it can find stuff at Model/Database/ no matter which page loads it
+    const url = new URL('./Database/' + file, import.meta.url);
+    
+    try { // the following code was pulled straight from W3schools
+      const response = await fetch(url, {
+        method: method,
+        headers: body ? { 'Content-Type': 'application/json' } : {},
+        body: body ? JSON.stringify(body) : undefined,
+        credentials: 'same-origin'
+      });
 
+      const data = await response.json();
+      if (!response.ok) {
+        return { ok: false, error: data.error || 'Something went wrong. Please try again.' };
+      }
+      return { ok: true, data: data };
+    } catch (err) { }
   }
 
-  signup({firstName, lastName, role, email}) {
-
+  async checkSession() {
+    const result = await this.request('session.php', 'GET');
+    this.currentUser = result.ok ? result.data.user : null;
+    this.sessionChecked = true;
+    this.notify();
   }
 
-  logout() {
+  async login({email, password}) {
+    return this.sendAccountRequest('login.php', {email, password});
+  }
 
+  async sendAccountRequest(file, body) {
+    this.authPending = true;
+    this.authError = null;
+    this.notify();
+
+    const result = await this.request(file, 'POST', body);
+    this.authPending = false;
+
+    if (!result.ok) {
+      this.authError = result.error;
+      this.notify();
+      return false;
+    }
+
+    this.currentUser = result.data.user;
+    this.activeModal = null;
+    this.notify();
+    return true;
+  }
+
+  signup({firstName, lastName, role, email, password, confirmPassword}) {
+    if (password !== confirmPassword) {
+      this.authError = "The passwords don't match";
+      this.notify();
+      return false;
+    }
+    return this.sendAccountRequest('signup.php', {firstName, lastName, role, email, password, confirmPassword});
+  }
+
+  async logout() {
+    await this.request('logout.php', 'POST');
+    this.currentUser = null;
+    this.notify();
   }
 
   // Stuff for the homepage

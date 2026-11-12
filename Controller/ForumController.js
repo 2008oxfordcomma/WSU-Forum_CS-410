@@ -17,12 +17,17 @@ class ForumController extends ForumControllerInterface{
     this.bindEvents();
     this.model.subscribe(this.view.render.bind(this.view));
     this.view.render(this.model);
+    this.model.checkSession(); // asks the server if this browser is already logged in
   }
 
   bindEvents() {
-    // if the user clicks on the login button the login popup opens
+    // if the user clicks on the login button the login popup opens, or it logs them out if they're already in
     this.view.loginBtn.addEventListener('click', () => {
-      this.model.openModal('login');
+      if (this.model.isLoggedIn()) {
+        this.model.logout();
+      } else {
+        this.model.openModal('login');
+      }
     });
 
     this.view.signupLink.addEventListener('click', (e) => {
@@ -43,17 +48,18 @@ class ForumController extends ForumControllerInterface{
       }
     });
 
-    // if the user clicks on the submit button the login popup opens
-    this.view.loginForm.addEventListener('submit', (e) => {
+    // sends what was typed to the model, which checks it with the server.
+    // the form only gets cleared if it worked, so a typo doesn't make them retype everything, something I find highly annoying on a real site
+    this.view.loginForm.addEventListener('submit', async (e) => {
       e.preventDefault();
-      this.view.clearLoginForm();
-      this.model.closeModal();
+      const worked = await this.model.login(this.view.getLoginFormData());
+      if (worked) this.view.clearLoginForm();
     });
 
-    this.view.signupForm.addEventListener('submit', (e) => {
+    this.view.signupForm.addEventListener('submit', async (e) => {
       e.preventDefault();
-      this.view.clearSignupForm();
-      this.model.closeModal();
+      const worked = await this.model.signup(this.view.getSignupFormData());
+      if (worked) this.view.clearSignupForm();
     });
   }
 }

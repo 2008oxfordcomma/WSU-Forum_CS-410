@@ -6,11 +6,23 @@ export default class ForumViewInterface {
         throw new Error('render() is not implemented');
     }
 
+    showError(element, message) {
+        throw new Error('showError() is not implemented');
+    }
+
+    getLoginFormData() {
+        throw new Error('getLoginFormData() is not implemented');
+    }
+
+    getSignupFormData() {
+        throw new Error('getSignupFormData() is not implemented');
+    }
+
     clearLoginForm() {
         throw new Error('clearLoginForm() is not implemented');
     }
 
     clearSignupForm() {
-        throw new Error('clearSignupForm() is not implemented'); 
+        throw new Error('clearSignupForm() is not implemented');
     }
 }

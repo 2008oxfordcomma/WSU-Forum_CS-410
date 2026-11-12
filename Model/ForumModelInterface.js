@@ -22,16 +22,28 @@ export default class ForumModelInterface {
         throw new Error('isLoggedIn() is not implemented');
     }
 
-    login({ email }) {
+    checkSession() {
+        throw new Error('checkSession() is not implemented');
+    }
+
+    login({ email, password }) {
         throw new Error('login() is not implemented');
     }
 
-    signup({ firstName, lastName, role, email }) {
+    signup({ firstName, lastName, role, email, password, confirmPassword }) {
         throw new Error('signup() is not implemented');
     }
 
     logout() {
         throw new Error('logout() is not implemented');
+    }
+
+    sendAccountRequest(file, body) {
+        throw new Error('sendAccountRequest() is not implemented');
+    }
+
+    request(file, method, body) {
+        throw new Error('request() is not implemented');
     }
 
     createEmptyHome() {

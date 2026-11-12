@@ -14,6 +14,15 @@ export default class ForumModel extends ForumModelInterface {
     this.sessionChecked = false;
     this.authError = null;
     this.authPending = false;
+    
+    // Quick links panel plain data, the view will decide how they look
+    // Will pass a copy of this to the view so nothing outside of the model can change the links
+    this.quickLinks = [
+      {id: 'groups',        label: 'Find Groups',       icon: '👥', url: '' }, // Internal page, no url until we build it
+      {id: 'wsu-resources', label: 'Campus Resources',  icon: '📖', url: 'https://www.winona.edu/student-life/support/equity/student-resources/'},
+      {id: 'wsu-calendar',  label: 'Academic Calendar', icon: '📅', url: 'https://www.winona.edu/about/series/academic-calendar/'},
+      {id: 'wsu-web',       label: 'WSU Website',       icon: '🌐', url: 'https://www.winona.edu'}
+    ];
   }
 
   // if I'm understanding Iyengar correctly, the model shouldn't need to know who is watching, 
@@ -136,5 +145,10 @@ export default class ForumModel extends ForumModelInterface {
 
   addPost(body) {
 
+  }
+
+  // Gives the view a copy of the quick links, so nothing outside the model can change the list
+  getQuickLinks() {
+    return this.quickLinks.slice();
   }
 }

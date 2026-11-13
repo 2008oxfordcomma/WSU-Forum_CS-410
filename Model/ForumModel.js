@@ -43,7 +43,7 @@ export default class ForumModel extends ForumModelInterface {
   }
 
   isLoggedIn() {
-    return this.currentUser !== null;
+    return this.currentUser != null;
   }
 
   async request(file, method, body) {
@@ -64,7 +64,10 @@ export default class ForumModel extends ForumModelInterface {
         return { ok: false, error: data.error || 'Something went wrong. Please try again.' };
       }
       return { ok: true, data: data };
-    } catch (err) { }
+    } catch (err) { 
+        console.error('request to ' + file + ' failed:', err);
+        return { ok: false, error: "couldn't reach the server, please try again" };
+    }
   }
 
   async checkSession() {

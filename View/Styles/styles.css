@@ -254,6 +254,135 @@ button {
 .signup-prompt a:hover {
   text-decoration: underline;
 }
+/* CSS for the user profile section */
+.profile-option-home::before{
+  content: "";
+  width: 20px;
+  height: 20px;
+  margin-right: 8px; 
+  background-image: url("images/HomeIcon.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  vertical-align: middle;
+}
+
+.profile-option-home{
+  display: flex;
+  margin-top: 10px
+}
+
+.profile-option-groups::before{
+  content: "";
+  width: 20px;
+  height: 20px;
+  margin-right: 8px; 
+  background-image: url("images/GroupSymbol.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  vertical-align: middle;
+}
+
+.profile-option-groups{
+  display: flex;
+  margin-top: 10px
+}
+
+.profile-option-messages::before{
+  content: "";
+  width: 20px;
+  height: 20px;
+  margin-right: 8px; 
+  background-image: url("images/MessageIcon.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  vertical-align: middle;
+}
+
+.profile-option-messages{
+  display: flex;
+  margin-top: 10px
+}
+
+.profile-option-saved::before{
+  content: "";
+  width: 20px;
+  height: 20px;
+  margin-right: 8px; 
+  background-image: url("images/SaveIcon.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  vertical-align: middle;
+}
+
+.profile-option-saved{
+  display: flex;
+  margin-top: 10px
+}
+
+.profile-option-settings::before{
+  content: "";
+  width: 20px;
+  height: 20px;
+  margin-right: 8px; 
+  background-image: url("images/SettingsIcon.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  vertical-align: middle;
+}
+
+.profile-option-settings{
+  display: flex;
+  margin-top: 10px
+}
+
+/* CSS for the trending groups section */
+.post-count h6 {
+  color:gray;
+}
+
+.trending-group::before{
+  content: "";
+  width: 20px;
+  height: 20px;
+  margin-right: 8px; 
+  background-image: url("images/250px-Hashtag_Symbol.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  vertical-align: middle;
+}
+
+.trending-group{
+  display: flex;
+  margin-top: 10px
+}
+
+.trending-group::nth-child(1){
+  order: 1;
+}
+
+/* CSS for the my groups section */
+.my-group-row::before{
+  content: "";
+  width: 20px;
+  height: 20px;
+  margin-right: 8px; 
+  background-image: url("images/GroupSymbol.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  vertical-align: middle;  
+}
+
+.my-group-row{
+  display: flex;
+  margin-top: 10px;
+}
 
 /* Note: I did use some of style tags from W3 Schools for the scroll bar component handling - Dre */
 

@@ -5,6 +5,8 @@
 import ForumControllerInterface from './ForumControllerInterface.js'
 import ForumModel from '../Model/ForumModel.js'
 import ForumView from '../View/ForumView.js'
+import HomeView from '../View/HomeView.js';
+import HomeController from './HomeController.js';
 
 class ForumController extends ForumControllerInterface{
 
@@ -15,6 +17,7 @@ class ForumController extends ForumControllerInterface{
     this.view = view;
 
     this.bindEvents();
+    this.homeController = new HomeController(this.model, new HomeView());
     this.model.subscribe(this.view.render.bind(this.view));
     this.view.render(this.model);
     this.model.checkSession(); // asks the server if this browser is already logged in

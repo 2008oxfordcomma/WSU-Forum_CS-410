@@ -69,4 +69,8 @@ export default class ForumModelInterface {
     addPost(body) {
         throw new Error('addPost() is not implemented');
     }
+
+    getQuickLinks() {
+        throw new Error('getQuickLinks() is not implemented');
+    }
 }

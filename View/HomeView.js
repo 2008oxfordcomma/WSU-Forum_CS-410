@@ -6,9 +6,11 @@ import HomeViewInterface from './HomeViewInterface.js'
 export default class HomeView extends HomeViewInterface {
     constructor() {
         super();
+        this.quickLinksPanel = document.getElementById('quickLinksPanel');
     }
 
     render(model) {
+        this.renderQuickLinks(model.getQuickLinks());
 
     }
 
@@ -53,7 +55,44 @@ export default class HomeView extends HomeViewInterface {
     }
 
     renderQuickLinks(links) {
+        const panel = this.quickLinksPanel;
+        
+        // Clear out old contents so re-rendering doesn't cause any weird bugs
+        panel.replaceChildren(); 
+        panel.appendChild(this.panelTitle('Quick Links'));
 
+        // Case where no links available
+        if (!links || links.length === 0) {
+            panel.appendChild(this.createElement('p', 'panel-empty', 'No links available.'));
+            return
+        }
+
+        // Rendering the links as a list
+        const list = this.createElement('ul', 'quick-links-list');
+        for (let i = 0; i < links.length; i++) {
+            const item = this.createElement('li', 'quick-links-item');
+            const anchor = this.createElement('a', 'quick-link');
+
+            // Open the link in a new tab 
+            anchor.href = links[i].url;
+            anchor.target = '_blank';
+            anchor.rel = 'noopener noreferrer'; // Safety so new page doesn't get access to our webapp 
+
+            // Assemble the actual list elements
+            anchor.appendChild(this.quickLinkIcon(links[i].icon));
+            anchor.appendChild(this.createElement('span', 'quick-link-label', links[i].label));
+            item.appendChild(anchor);
+            list.appendChild(item);
+        }
+        // Place finished list into panel
+        panel.appendChild(list);
+    }
+
+    // Helper method to create an icon element
+    quickLinkIcon(icon) {
+        const title = this.createElement('span', 'quick-link-icon', icon);
+        title.setAttribute('aria-hidden', 'true')
+        return title;
     }
 
     renderTrendingGroups(groups) {
@@ -63,9 +102,14 @@ export default class HomeView extends HomeViewInterface {
     // These are some helper methods to make working with html and js easier since I know not all of us are super familiar, 
     // if any of you have worked with Node.js, to replicate the behavior of creating html elements with js, that's what these will be for
 
+    // Builds and configures a new HTML element in 1 step
     createElement(tag, className, text) {
-
+        const element = document.createElement(tag);
+        if (className) element.className = className;
+        if (text !== undefined && text !== null) element.textContent = text;
+        return element;
     }
+
 
     field(tag, className, value) {
 
@@ -75,8 +119,9 @@ export default class HomeView extends HomeViewInterface {
 
     }
 
+    // Returns panel title from createElement helper method
     panelTitle(text) {
-
+        return this.createElement('h2', 'panel-title', text)
     }
 
     iconButton(action) {

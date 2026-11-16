@@ -14,6 +14,7 @@ export default class ForumModel extends ForumModelInterface {
     this.sessionChecked = false;
     this.authError = null;
     this.authPending = false;
+    this.comments = [];
     
     // Quick links panel plain data, the view will decide how they look
     // Will pass a copy of this to the view so nothing outside of the model can change the links
@@ -125,6 +126,12 @@ export default class ForumModel extends ForumModelInterface {
     this.notify();
   }
 
+  async findComments() {
+    const result = await this.request('HomeFeed.php', 'POST');
+    this.comments = result.ok ? result.data : [];
+    this.notify();
+  }
+
   // Stuff for the homepage
 
   createEmptyHome() {
@@ -148,6 +155,10 @@ export default class ForumModel extends ForumModelInterface {
 
   addPost(body) {
 
+  }
+
+  getComments(){
+    return this.comments;
   }
 
   // Gives the view a copy of the quick links, so nothing outside the model can change the list

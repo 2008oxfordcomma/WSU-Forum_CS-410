@@ -11,7 +11,7 @@ export default class HomeView extends HomeViewInterface {
 
     render(model) {
         this.renderQuickLinks(model.getQuickLinks());
-
+        this.renderPosts(model.getComments());
     }
 
     renderProfileSection() {
@@ -42,14 +42,42 @@ export default class HomeView extends HomeViewInterface {
 
     }
 
+    //@ Ethan All the feed
     renderPosts(posts) {
+        const feedPanel = document.getElementById("postFeed");
+        feedPanel.replaceChildren();
 
+        for(let i = 0; i < posts.length; i++){
+            this.postItem(posts[i]);
+        }
     }
 
+    //@ Ethan Each item at the feed
     postItem(post) {
 
+        const feedPanel = document.getElementById("postFeed");
+
+        const messageContainer = document.createElement("div");
+        messageContainer.className = "post";
+
+        const userWhoMessaged = document.createElement("p");
+        userWhoMessaged.className = "post-user";
+        userWhoMessaged.textContent = post.fname + " " + post.lname;
+        const messageFromUser = document.createElement("p");
+        messageFromUser.className = "post-message";
+        messageFromUser.textContent = post.message;
+        const timeOfMessage = document.createElement("p");
+        timeOfMessage.className = "post-time";
+        timeOfMessage.textContent = post.send_time;
+        
+        messageContainer.appendChild(userWhoMessaged);
+        messageContainer.appendChild(messageFromUser);
+        messageContainer.appendChild(timeOfMessage);
+        feedPanel.appendChild(messageContainer);
     }
 
+
+    // Future implementation of deleting posts, or other features
     postAction(action, count) {
 
     }

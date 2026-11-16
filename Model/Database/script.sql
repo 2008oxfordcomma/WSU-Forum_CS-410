@@ -1,7 +1,7 @@
 -- Primary Author: Rachal Thornton
--- Additional Contributors:
+-- Additional Contributors: Ethan Larson
 -- Date Created: 11/04/26
--- Date Last Updated: 11/11/26
+-- Date Last Updated: 11/15/26
 -- Description: A SQL script for the WarriorChat web-application.
 
 -- Create database if not exists
@@ -28,3 +28,14 @@ CREATE TABLE IF NOT EXISTS users (
         OR email LIKE '_%._%@winona.edu'    
     )
 );
+
+-- Comment table
+CREATE TABLE IF NOT EXISTS comments (
+    user_id INT NOT NULL,
+    comment_id INT PRIMARY KEY AUTO_INCREMENT,
+    message VARCHAR(2000) NOT NULL,
+    send_time TIMESTAMP NOT NULL,
+    FOREIGN KEY(user_id) REFERENCES users(user_id)
+);
+
+

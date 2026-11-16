@@ -1,5 +1,7 @@
 // Author: Dre Harm
-// Date: 11/8/26
+//Additional Contributor(s): Ethan Larson
+// Date Published: 11/8/26
+//Date Modified: 11/16/26
 
 export default class ForumModelInterface {
     subscribe(listener) {
@@ -72,5 +74,9 @@ export default class ForumModelInterface {
 
     getQuickLinks() {
         throw new Error('getQuickLinks() is not implemented');
+    }
+
+    getComments() {
+        throw new Error('getComments() is not implemented');
     }
 }

@@ -82,5 +82,5 @@ CREATE TABLE IF NOT EXISTS `user_saves` (
 
     PRIMARY KEY(user_id, comment_id),
     FOREIGN KEY(user_id) REFERENCES `users`(user_id),
-    FOREIGN KEY(comment_id) REFERENCES `commennts`(comment_id)
+    FOREIGN KEY(comment_id) REFERENCES `comments`(comment_id)
 );

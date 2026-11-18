@@ -11,6 +11,7 @@ export default class HomeController extends HomeControllerInterface {
         this.bindEvents();
         this.model.subscribe(this.homeView.render.bind(this.homeView));
         this.homeView.render(this.model);
+        this.model.findPosts();
     }
 
     bindEvents() {

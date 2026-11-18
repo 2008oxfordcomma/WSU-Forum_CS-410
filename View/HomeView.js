@@ -11,7 +11,7 @@ export default class HomeView extends HomeViewInterface {
 
     render(model) {
         this.renderQuickLinks(model.getQuickLinks());
-        this.renderPosts(model.getComments());
+        this.renderPosts(model.getPosts());
     }
 
     renderProfileSection() {

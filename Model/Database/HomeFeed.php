@@ -9,7 +9,7 @@ requirePost();
 startSession();
 
 
-$stmt = $pdo->prepare('SELECT fname, lname, message, send_time FROM comments, users where comments.user_id = users.user_id order by send_time asc');
+$stmt = $pdo->prepare('SELECT fname, lname, message, send_time FROM posts, users where posts.user_id = users.user_id order by send_time asc');
 $stmt->execute();
 $comments = $stmt->fetchAll();
 

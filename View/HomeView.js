@@ -72,6 +72,21 @@ export default class HomeView extends HomeViewInterface {
         
         messageContainer.appendChild(userWhoMessaged);
         messageContainer.appendChild(messageFromUser);
+        if (post.filename) {
+            const url = new URL('../Model/Database/attachment.php', import.meta.url);
+            url.searchParams.set('post', post.post_id);
+            const link = document.createElement('a');
+            link.href = url;
+            link.textContent = post.filename;
+            if (post.mime.startsWith('image/')) {
+                const image = document.createElement('img');
+                image.src = url;
+                image.alt = post.filename;
+                image.loading = 'lazy';
+                link.prepend(image);
+            }
+            messageContainer.appendChild(link);
+        }
         messageContainer.appendChild(timeOfMessage);
         feedPanel.appendChild(messageContainer);
     }

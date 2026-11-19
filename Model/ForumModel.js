@@ -64,8 +64,8 @@ export default class ForumModel extends ForumModelInterface {
     try { // the following code was pulled straight from W3schools
       const response = await fetch(url, {
         method: method,
-        headers: body ? { 'Content-Type': 'application/json' } : {},
-        body: body ? JSON.stringify(body) : undefined,
+        headers: body && !(body instanceof FormData) ? { 'Content-Type': 'application/json' } : {},
+        body: body instanceof FormData ? body : (body ? JSON.stringify(body) : undefined),
         credentials: 'same-origin'
       });
 
@@ -128,8 +128,7 @@ export default class ForumModel extends ForumModelInterface {
 
   async findPosts() {
     const result = await this.request('HomeFeed.php', 'POST');
-    this.posts = result.ok ? result.data : [];
-    this.notify();
+    return result;
   }
 
   // Stuff for the homepage
@@ -154,7 +153,7 @@ export default class ForumModel extends ForumModelInterface {
   }
 
   addPost(body) {
-
+    return this.request('createPost.php', 'POST', body);
   }
 
   getPosts(){

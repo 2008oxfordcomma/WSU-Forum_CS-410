@@ -11,7 +11,7 @@ CREATE DATABASE IF NOT EXISTS warrior_chat_db;
 USE warrior_chat_db;
 
 -- Users table
-CREATE TABLE IF NOT EXISTS users (
+CREATE TABLE IF NOT EXISTS `users` (
     user_id INT PRIMARY KEY AUTO_INCREMENT,
     fname VARCHAR(50) NOT NULL,
     lname VARCHAR(50) NOT NULL,
@@ -26,50 +26,61 @@ CREATE TABLE IF NOT EXISTS users (
     )
 );
 
--- Comments table
-CREATE TABLE IF NOT EXISTS comments (
+-- Posts table
+CREATE TABLE IF NOT EXISTS `posts` (
+    post_id INT PRIMARY KEY AUTO_INCREMENT,
+    user_id INT NOT NULL,
+    group_id INT NOT NULL,
+    message VARCHAR(2000) NOT NULL,
+    send_time TIMESTAMP NOT NULL,
+    
+    FOREIGN KEY(user_id) REFERENCES `users`(user_id),
+    FOREIGN KEY(group_id) REFERENCES `groups`(group_id)
+);
+
+-- Comment table
+CREATE TABLE IF NOT EXISTS `comments` (
     comment_id INT PRIMARY KEY AUTO_INCREMENT,
     user_id INT NOT NULL,
     message VARCHAR(2000) NOT NULL,
     send_time TIMESTAMP NOT NULL,
-    
-    FOREIGN KEY(user_id) REFERENCES users(user_id)
+
+    FOREIGN KEY(user_id) REFERENCES `users`(user_id)
 );
 
--- Replies table
-CREATE TABLE IF NOT EXISTS replies (
-    reply_id INT PRIMARY KEY AUTO_INCREMENT,
-    comment_id INT NOT NULL,
-    user_id INT NOT NULL,
-    message VARCHAR(2000) NOT NULL,
-    send_time TIMESTAMP NOT NULL,
+-- User comments on a post table
+CREATE TABLE IF NOT EXISTS `post_comments` (
+    post_id INT,
+    comment_id INT,
 
-    FOREIGN KEY(comment_id) REFERENCES comments(comment_id),
-    FOREIGN KEY(user_id) REFERENCES users(user_id)
+    PRIMARY KEY(post_id, comment_id),
+    FOREIGN KEY(post_id) REFERENCES `posts`(post_id),
+    FOREIGN KEY(comment_id) REFERENCES `comments`(comment_id)
+    
 );
 
 -- Groups table
-CREATE TABLE IF NOT EXISTS groups (
+CREATE TABLE IF NOT EXISTS `groups` (
     group_id INT PRIMARY KEY AUTO_INCREMENT,
     group_name VARCHAR(50) NOT NULL
 );
 
 -- User in groups table
-CREATE TABLE IF NOT EXISTS user_groups (
+CREATE TABLE IF NOT EXISTS `user_groups` (
     user_id INT,
     group_id INT,
     
     PRIMARY KEY(user_id, group_id),
-    FOREIGN KEY(user_id) REFERENCES users(user_id),
-    FOREIGN KEY(group_id) REFERENCES groups(group_id) 
+    FOREIGN KEY(user_id) REFERENCES `users`(user_id),
+    FOREIGN KEY(group_id) REFERENCES `groups`(group_id) 
 );
 
 -- User saves posts
-CREATE TABLE IF NOT EXISTS user_saves (
+CREATE TABLE IF NOT EXISTS `user_saves` (
     user_id INT,
     comment_id INT,
 
     PRIMARY KEY(user_id, comment_id),
-    FOREIGN KEY(user_id) REFERENCES users(user_id),
-    FOREIGN KEY(comment_id) REFERENCES commennts(comment_id)
+    FOREIGN KEY(user_id) REFERENCES `users`(user_id),
+    FOREIGN KEY(comment_id) REFERENCES `comments`(comment_id)
 );

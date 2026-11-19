@@ -76,7 +76,7 @@ export default class ForumModelInterface {
         throw new Error('getQuickLinks() is not implemented');
     }
 
-    getComments() {
-        throw new Error('getComments() is not implemented');
+    getPosts() {
+        throw new Error('getPosts() is not implemented');
     }
 }

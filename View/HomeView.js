@@ -1,4 +1,5 @@
 // Author: Dre Harm
+// Contributors: Rachal, Alyssa, Ethan
 // Date 11/8/26
 
 import HomeViewInterface from './HomeViewInterface.js'
@@ -7,15 +8,41 @@ export default class HomeView extends HomeViewInterface {
     constructor() {
         super();
         this.quickLinksPanel = document.getElementById('quickLinksPanel');
+        this.profilePanel = document.getElementById('profile-panel');
+        this.trendingGroupsPanel = document.getElementById('trendingGroupsPanel');
     }
 
     render(model) {
         this.renderQuickLinks(model.getQuickLinks());
         this.renderPosts(model.getComments());
+        this.renderProfileSection(model.getProfileOptions());
+        this.renderTrendingGroups();
     }
 
-    renderProfileSection() {
+    renderProfileSection(profileOptions) {
+        const panel = this.profilePanel;
+        
+        // Clear out old contents so re-rendering doesn't cause any weird bugs
+        panel.replaceChildren(); 
+        panel.appendChild(this.panelTitle('Profile'));
 
+        // Case where no options available
+        if (!profileOptions || profileOptions.length === 0) {
+            panel.appendChild(this.createElement('p', 'panel-empty', 'No profile options available.'));
+            return
+        }
+
+        // Rendering the list
+        const list = this.createElement('div', 'profile-options');
+        for (let i = 0; i < profileOptions.length; i++) {
+            const item = this.createElement('h4', 'profile-option-'+profileOptions[i].id);
+
+            // Assemble the actual list elements
+            item.appendChild(this.createElement('span', 'profile-options-label', profileOptions[i].label));
+            list.appendChild(item);
+        }
+        // Place finished list into panel
+        panel.appendChild(list);
     }
 
     // the name is kind of self explanatory but 
@@ -25,7 +52,29 @@ export default class HomeView extends HomeViewInterface {
 
     // My Groups panel in the left column
     renderMyGroups(groups) {
+        const panel = this.trendingGroupsPanel;
+        
+        // Clear out old contents so re-rendering doesn't cause any weird bugs
+        panel.replaceChildren(); 
+        panel.appendChild(this.panelTitle('My Groups'));
 
+        // Case where no options available
+        if (!groups || groups.length === 0) {
+            panel.appendChild(this.createElement('p', 'panel-empty', 'No groups available.'));
+            return
+        }
+
+         // Rendering the list
+        const list = this.createElement('ul', 'my-groups-list');
+        for (let i = 0; i < groups.length; i++) {
+            const item = this.createElement('li', 'my-groups-item');
+
+            // Assemble the actual list elements
+            item.appendChild(this.createElement('span', 'my-groups-label', groups[i].label));
+            list.appendChild(item);
+        }
+        // Place finished list into panel
+        panel.appendChild(list);
     }
 
     // one of the row in the My Groups list
@@ -124,7 +173,29 @@ export default class HomeView extends HomeViewInterface {
     }
 
     renderTrendingGroups(groups) {
+        const panel = this.trendingGroupsPanel;
+        
+        // Clear out old contents so re-rendering doesn't cause any weird bugs
+        panel.replaceChildren(); 
+        panel.appendChild(this.panelTitle('Trending Groups'));
 
+        // Case where no options available
+        if (!groups || groups.length === 0) {
+            panel.appendChild(this.createElement('p', 'panel-empty', 'No trending groups available.'));
+            return
+        }
+
+         // Rendering the list
+        const list = this.createElement('ul', 'trending-groups-list');
+        for (let i = 0; i < groups.length; i++) {
+            const item = this.createElement('li', 'trending-groups-item');
+
+            // Assemble the actual list elements
+            item.appendChild(this.createElement('span', 'trending-groups-label', groups[i].label));
+            list.appendChild(item);
+        }
+        // Place finished list into panel
+        panel.appendChild(list);
     }
 
     // These are some helper methods to make working with html and js easier since I know not all of us are super familiar, 

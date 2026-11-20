@@ -24,6 +24,14 @@ export default class ForumModel extends ForumModelInterface {
       {id: 'wsu-calendar',  label: 'Academic Calendar', icon: '📅', url: 'https://www.winona.edu/about/series/academic-calendar/'},
       {id: 'wsu-web',       label: 'WSU Website',       icon: '🌐', url: 'https://www.winona.edu'}
     ];
+
+    this.profileOptions = [
+      {id: 'home', label: 'Home'},
+      {id: 'groups', label: 'My Groups'},
+      {id: 'messages', label: 'Messages'},
+      {id: 'saved-posts', label: 'Saved Posts'},
+      {id: 'settings', label: 'Settings'}
+    ]
   }
 
   // if I'm understanding Iyengar correctly, the model shouldn't need to know who is watching, 
@@ -80,13 +88,13 @@ export default class ForumModel extends ForumModelInterface {
     }
   }
 
+  //DO NOT PUSH THIS FUNCTION LIKE THIS IF THIS WAS PUSHED BLAME ALYSSA
   async checkSession() {
-    const result = await this.request('session.php', 'GET');
-    this.currentUser = result.ok ? result.data.user : null;
+    this.currentUser = { id: 1, firstName: 'Test', lastName: 'User', role: 'Student', email: 'test@go.winona.edu' };
     this.sessionChecked = true;
     this.notify();
   }
-
+  
   async login({email, password}) {
     return this.sendAccountRequest('login.php', {email, password});
   }
@@ -165,4 +173,10 @@ export default class ForumModel extends ForumModelInterface {
   getQuickLinks() {
     return this.quickLinks.slice();
   }
+
+  getProfileOptions(){
+    return this.profileOptions.slice();
+  }
+
+  
 }

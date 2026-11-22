@@ -10,6 +10,7 @@ export default class HomeView extends HomeViewInterface {
         this.quickLinksPanel = document.getElementById('quickLinksPanel');
         this.profilePanel = document.getElementById('profile-panel');
         this.trendingGroupsPanel = document.getElementById('trendingGroupsPanel');
+        this.myGroupsPanel = document.getElementById('myGroupsPanel');
     }
 
     render(model) {
@@ -17,6 +18,7 @@ export default class HomeView extends HomeViewInterface {
         this.renderPosts(model.getComments());
         this.renderProfileSection(model.getProfileOptions());
         this.renderTrendingGroups();
+        this.renderMyGroups(model.getMyGroups());
     }
 
     renderProfileSection(profileOptions) {
@@ -52,7 +54,7 @@ export default class HomeView extends HomeViewInterface {
 
     // My Groups panel in the left column
     renderMyGroups(groups) {
-        const panel = this.trendingGroupsPanel;
+        const panel = this.myGroupsPanel;
         
         // Clear out old contents so re-rendering doesn't cause any weird bugs
         panel.replaceChildren(); 
@@ -65,14 +67,15 @@ export default class HomeView extends HomeViewInterface {
         }
 
          // Rendering the list
-        const list = this.createElement('ul', 'my-groups-list');
+        const list = this.createElement('div', 'my-groups-list');
         for (let i = 0; i < groups.length; i++) {
-            const item = this.createElement('li', 'my-groups-item');
+            const item = this.createElement('div', 'my-group-row');
 
             // Assemble the actual list elements
-            item.appendChild(this.createElement('span', 'my-groups-label', groups[i].label));
+            item.appendChild(this.createElement('span', 'my-groups-label', groups[i].name));
             list.appendChild(item);
         }
+        list.appendChild(this.createElement('h5', 'view-all', 'View All →'));
         // Place finished list into panel
         panel.appendChild(list);
     }

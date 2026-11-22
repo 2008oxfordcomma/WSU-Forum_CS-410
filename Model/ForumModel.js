@@ -32,6 +32,14 @@ export default class ForumModel extends ForumModelInterface {
       {id: 'saved-posts', label: 'Saved Posts'},
       {id: 'settings', label: 'Settings'}
     ]
+
+    this.myGroups = [
+      {name: 'My Group'},
+      {name: 'My Group'},
+      {name: 'My Group'},
+      {name: 'My Group'},
+      {name: 'My Group'}
+   ]
   }
 
   // if I'm understanding Iyengar correctly, the model shouldn't need to know who is watching, 
@@ -176,6 +184,10 @@ export default class ForumModel extends ForumModelInterface {
 
   getProfileOptions(){
     return this.profileOptions.slice();
+  }
+
+  getMyGroups(){
+    return this.myGroups.slice();
   }
 
   

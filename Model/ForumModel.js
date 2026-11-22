@@ -24,6 +24,30 @@ export default class ForumModel extends ForumModelInterface {
       {id: 'wsu-calendar',  label: 'Academic Calendar', icon: '📅', url: 'https://www.winona.edu/about/series/academic-calendar/'},
       {id: 'wsu-web',       label: 'WSU Website',       icon: '🌐', url: 'https://www.winona.edu'}
     ];
+
+    this.profileOptions = [
+      {id: 'home', label: 'Home'},
+      {id: 'groups', label: 'My Groups'},
+      {id: 'messages', label: 'Messages'},
+      {id: 'saved-posts', label: 'Saved Posts'},
+      {id: 'settings', label: 'Settings'}
+    ]
+
+    this.myGroups = [
+      {name: 'My Group'},
+      {name: 'My Group'},
+      {name: 'My Group'},
+      {name: 'My Group'},
+      {name: 'My Group'}
+   ]
+
+   this.trendingGroups = [
+    {name: 'Trending Group', posts: '0'},
+    {name: 'Trending Group', posts: '0'},
+    {name: 'Trending Group', posts: '0'},
+    {name: 'Trending Group', posts: '0'},
+    {name: 'Trending Group', posts: '0'},
+   ]
   }
 
   // if I'm understanding Iyengar correctly, the model shouldn't need to know who is watching, 
@@ -86,7 +110,7 @@ export default class ForumModel extends ForumModelInterface {
     this.sessionChecked = true;
     this.notify();
   }
-
+  
   async login({email, password}) {
     return this.sendAccountRequest('login.php', {email, password});
   }
@@ -164,4 +188,18 @@ export default class ForumModel extends ForumModelInterface {
   getQuickLinks() {
     return this.quickLinks.slice();
   }
+
+  getProfileOptions(){
+    return this.profileOptions.slice();
+  }
+
+  getMyGroups(){
+    return this.myGroups.slice();
+  }
+
+  getTrendingGroups(){
+    return this.trendingGroups.slice();
+  }
+
+  
 }

@@ -198,3 +198,29 @@
   display: flex;
   margin-top: 10px;
 }
+
+/* CSS for the trending groups section */
+.post-count h6 {
+  color:gray;
+}
+
+.trending-group::before{
+  content: "";
+  width: 20px;
+  height: 20px;
+  margin-right: 8px; 
+  background-image: url("images/250px-Hashtag_Symbol.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  vertical-align: middle;
+}
+
+.trending-group{
+  display: flex;
+  margin-top: 10px
+}
+
+.trending-group::nth-child(1){
+  order: 1;
+}

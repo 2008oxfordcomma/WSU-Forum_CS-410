@@ -40,6 +40,14 @@ export default class ForumModel extends ForumModelInterface {
       {name: 'My Group'},
       {name: 'My Group'}
    ]
+
+   this.trendingGroups = [
+    {name: 'Trending Group', posts: '0'},
+    {name: 'Trending Group', posts: '0'},
+    {name: 'Trending Group', posts: '0'},
+    {name: 'Trending Group', posts: '0'},
+    {name: 'Trending Group', posts: '0'},
+   ]
   }
 
   // if I'm understanding Iyengar correctly, the model shouldn't need to know who is watching, 
@@ -96,9 +104,9 @@ export default class ForumModel extends ForumModelInterface {
     }
   }
 
-  //DO NOT PUSH THIS FUNCTION LIKE THIS IF THIS WAS PUSHED BLAME ALYSSA
   async checkSession() {
-    this.currentUser = { id: 1, firstName: 'Test', lastName: 'User', role: 'Student', email: 'test@go.winona.edu' };
+    const result = await this.request('session.php', 'GET');
+    this.currentUser = result.ok ? result.data.user : null;
     this.sessionChecked = true;
     this.notify();
   }
@@ -188,6 +196,10 @@ export default class ForumModel extends ForumModelInterface {
 
   getMyGroups(){
     return this.myGroups.slice();
+  }
+
+  getTrendingGroups(){
+    return this.trendingGroups.slice();
   }
 
   

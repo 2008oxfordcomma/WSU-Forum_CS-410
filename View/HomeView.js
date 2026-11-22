@@ -17,7 +17,7 @@ export default class HomeView extends HomeViewInterface {
         this.renderQuickLinks(model.getQuickLinks());
         this.renderPosts(model.getComments());
         this.renderProfileSection(model.getProfileOptions());
-        this.renderTrendingGroups();
+        this.renderTrendingGroups(model.getTrendingGroups());
         this.renderMyGroups(model.getMyGroups());
     }
 
@@ -189,13 +189,14 @@ export default class HomeView extends HomeViewInterface {
         }
 
          // Rendering the list
-        const list = this.createElement('ul', 'trending-groups-list');
+        const list = this.createElement('div', 'trending-groups-list');
         for (let i = 0; i < groups.length; i++) {
-            const item = this.createElement('li', 'trending-groups-item');
+            const item = this.createElement('div', 'trending-group');
 
             // Assemble the actual list elements
-            item.appendChild(this.createElement('span', 'trending-groups-label', groups[i].label));
+            item.appendChild(this.createElement('span', 'trending-group-label', groups[i].name));
             list.appendChild(item);
+            list.appendChild(this.createElement('h6', 'post-count', groups[i].posts + ' posts'));
         }
         // Place finished list into panel
         panel.appendChild(list);

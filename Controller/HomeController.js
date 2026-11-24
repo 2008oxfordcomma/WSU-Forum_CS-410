@@ -1,4 +1,5 @@
-// Author: Dre Harm
+// Author: Dre Harm - made file + empty constructor + added polling
+//         Benjamin - added everything else
 // Date: 11/8/26
 
 import HomeControllerInterface from './HomeControllerInterface.js'
@@ -16,12 +17,35 @@ export default class HomeController extends HomeControllerInterface {
         this.bindEvents();
         model.subscribe(() => this.render());
         this.render();
+        this.pollTimer = null;
     }
 
     bindEvents() {
         this.form.addEventListener('input', () => this.updateComposer());
         this.form.addEventListener('change', () => this.updateComposer());
         this.form.addEventListener('submit', event => this.submit(event));
+    }
+
+    async checkForNewPosts() {
+        const result = await this.model.findPosts();
+        if (!result.ok) return; 
+
+        const newestOnServer = result.data[0]?.post_id;
+        const newestOnScreen = this.model.posts[0]?.post_id;
+
+        if (newestOnServer !== newestOnScreen) {
+            this.model.posts = result.data;
+            this.homeView.render(this.model);
+        }
+    }
+
+    startPolling() {
+        this.pollTimer = setInterval(() => this.checkForNewPosts(), 5000);
+    }
+
+    stopPolling() {
+        clearInterval(this.pollTimer);
+        this.pollTimer = null;
     }
 
     render() {
@@ -35,7 +59,11 @@ export default class HomeController extends HomeControllerInterface {
             this.status.textContent = '';
             this.feedStatus.textContent = '';
             this.updateComposer();
-            if (owner !== null) this.loadFeed(this.generation);
+            this.stopPolling();
+            if (owner !== null) {
+                this.loadFeed(this.generation);
+                this.startPolling();
+            }
         }
         this.homeView.render(this.model);
     }

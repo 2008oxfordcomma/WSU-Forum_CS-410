@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="Styles/styles.css">
     <link rel="stylesheet" href="Styles/home.css">
 </head>
+
 <body>
     <nav class="navbar">
         <div class="container">
@@ -34,7 +35,7 @@
     </nav>
     <main id="guestPage" class="main-content landing" hidden>
         <section class="top-section">
-            <div class="bg-image"></div> 
+            <div class="bg-image"></div>
             <!-- We'll need to add a bunch of div's or parapraphs for the text, 
              if I set up the background image correctly, the image shouldn't interfere with the text -->
         </section>
@@ -65,8 +66,17 @@
             </section>
         </aside>
         <div class="home-center">
-            <section id="postSimpleMessage" class="home-panel"></section>
+            <section id="postSimpleMessage" class="home-panel">
+                <form id="postForm">
+                    <textarea name="message" rows="3" placeholder="What's on your mind?"></textarea>
+                    <span id="wordCount"></span>
+                    <input type="file" name="attachment">
+                    <button type="submit">Post</button>
+                    <p id="postStatus"></p>
+                </form>
+            </section>
             <section id="feedHeader"></section>
+            <p id="feedStatus"></p>
             <section id="postFeed"></section>
         </div>
         <aside class="home-right">
@@ -115,12 +125,14 @@
                             <input type="checkbox" id="rememberMe">
                             Remember me
                         </label>
-                        <a href="#" class="forgot-link">Forgot Password?</a> <!-- this will eventually link to something -->
+                        <a href="#" class="forgot-link">Forgot Password?</a>
+                        <!-- this will eventually link to something -->
                     </div>
                     <p id="loginError" class="form-error" hidden></p>
                     <button type="submit" class="submit-btn" id="loginSubmit">Login</button>
                 </form>
-                <p class="signup-prompt">Don't have an account? <a href="#" id="signupLink">Sign Up</a></p> <!-- this will eventually link to the create account page -->
+                <p class="signup-prompt">Don't have an account? <a href="#" id="signupLink">Sign Up</a></p>
+                <!-- this will eventually link to the create account page -->
             </div>
         </div>
     </div>
@@ -131,7 +143,7 @@
                 <h2>Create Account</h2>
                 <p class="login-subtitle">Join the WSU forum</p>
                 <form id="signupForm">
-                    
+
                     <div class="form-row-split">
                         <div class="form-group">
                             <input type="text" id="signupFirstName" placeholder="First Name" required>
@@ -160,7 +172,7 @@
                     <div class="form-group">
                         <input type="password" id="signupConfirmPassword" placeholder="Confirm Password" required>
                     </div>
-                    
+
                     <p id="signupError" class="form-error" hidden></p>
                     <button type="submit" class="submit-btn" id="signupSubmit">Create Account</button>
                 </form>
@@ -168,10 +180,7 @@
         </div>
     </div>
     <!-- If we need to add more JS files or want to break this up more we can but I'm just planning out the MVC -->
-    <script type="module" src="../Model/ForumModel.js"></script>
-    <script type="module" src="ForumView.js"></script>
-    <script type="module" src="HomeView.js"></script>
     <script type="module" src="../Controller/ForumController.js"></script>
-    <script type="module" src="../Controller/HomeController.js"></script>
 </body>
+
 </html>

@@ -26,6 +26,12 @@ CREATE TABLE IF NOT EXISTS `users` (
     )
 );
 
+-- Groups table
+CREATE TABLE IF NOT EXISTS `groups` (
+    group_id INT PRIMARY KEY AUTO_INCREMENT,
+    group_name VARCHAR(50) NOT NULL
+);
+
 -- Posts table
 CREATE TABLE IF NOT EXISTS `posts` (
     post_id INT PRIMARY KEY AUTO_INCREMENT,
@@ -57,12 +63,6 @@ CREATE TABLE IF NOT EXISTS `post_comments` (
     FOREIGN KEY(post_id) REFERENCES `posts`(post_id),
     FOREIGN KEY(comment_id) REFERENCES `comments`(comment_id)
     
-);
-
--- Groups table
-CREATE TABLE IF NOT EXISTS `groups` (
-    group_id INT PRIMARY KEY AUTO_INCREMENT,
-    group_name VARCHAR(50) NOT NULL
 );
 
 -- User in groups table

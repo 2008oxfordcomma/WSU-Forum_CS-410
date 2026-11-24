@@ -9,7 +9,11 @@ requirePost();
 startSession();
 
 
-$stmt = $pdo->prepare('SELECT fname, lname, message, send_time FROM posts, users where posts.user_id = users.user_id order by send_time desc');
+if (empty($_SESSION['user_id'])) sendError('Please log in.', 401);
+$stmt = $pdo->prepare('SELECT c.post_id, u.fname, u.lname, c.message, c.send_time, a.filename, a.mime
+    FROM posts c JOIN users u ON c.user_id = u.user_id
+    LEFT JOIN dashboard_post_attachments a ON a.post_id = c.post_id
+    ORDER BY c.send_time DESC, c.post_id DESC');
 $stmt->execute();
 $posts = $stmt->fetchAll();
 

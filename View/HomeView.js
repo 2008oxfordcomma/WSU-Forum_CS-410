@@ -143,12 +143,6 @@ export default class HomeView extends HomeViewInterface {
         feedPanel.appendChild(messageContainer);
     }
 
-
-    // Future implementation of deleting posts, or other features
-    postAction(action, count) {
-
-    }
-
     renderQuickLinks(links) {
         const panel = this.quickLinksPanel;
         
@@ -228,46 +222,8 @@ export default class HomeView extends HomeViewInterface {
         return element;
     }
 
-
-    field(tag, className, value) {
-
-    }
-
-    avatar(name, sizeClass) {
-
-    }
-
     // Returns panel title from createElement helper method
     panelTitle(text) {
         return this.createElement('h2', 'panel-title', text)
-    }
-
-    iconButton(action) {
-
-    }
-
-    moreButton() {
-
-    }
-
-    getInitials(name) {
-
-    }
-
-    capitalize(text) {
-
-    }
-
-    isEmpty(value) {
-
-    }
-
-    // Just to seperate these out, the controller should ask for these and everything else above stays within the view
-    getSimpleMessageText() {
-
-    }
-
-    clearSimpleMessage() {
-
     }
 }

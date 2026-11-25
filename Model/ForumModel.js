@@ -19,7 +19,7 @@ export default class ForumModel extends ForumModelInterface {
     // Quick links panel plain data, the view will decide how they look
     // Will pass a copy of this to the view so nothing outside of the model can change the links
     this.quickLinks = [
-      {id: 'groups',        label: 'Find Groups',       icon: '👥', url: '' }, // Internal page, no url until we build it
+      {id: 'groups',        label: 'Find Groups',       icon: '👥', url: 'groups.html' },
       {id: 'wsu-resources', label: 'Campus Resources',  icon: '📖', url: 'https://www.winona.edu/student-life/support/equity/student-resources/'},
       {id: 'wsu-calendar',  label: 'Academic Calendar', icon: '📅', url: 'https://www.winona.edu/about/series/academic-calendar/'},
       {id: 'wsu-web',       label: 'WSU Website',       icon: '🌐', url: 'https://www.winona.edu'}
@@ -33,13 +33,20 @@ export default class ForumModel extends ForumModelInterface {
       {id: 'settings', label: 'Settings'}
     ]
 
-    this.myGroups = [
-      {name: 'My Group'},
-      {name: 'My Group'},
-      {name: 'My Group'},
-      {name: 'My Group'},
-      {name: 'My Group'}
-   ]
+  //   this.myGroups = [
+  //     {name: 'My Group'},
+  //     {name: 'My Group'},
+  //     {name: 'My Group'},
+  //     {name: 'My Group'},
+  //     {name: 'My Group'}
+  //  ]
+
+    // we have to have a way to store the group page states and handle state logic
+    this.groups = [];
+    this.groupsLoaded = false; // false until groups.php answers, so the groups page can say "Loading..." instead of "no groups"
+    this.groupError = null; // message inside the Create Group popup
+    // pulled these from Benjamin's mockup, might be a good idea to outsource these to a config file, so, like Iyengar said, it could be easily changed if given to another institution
+    this.groupTypes = ['Academic', 'Campus Life', 'Organizations', 'Housing', 'Lifestyle', 'Sports'];
 
    this.trendingGroups = [
     {name: 'Trending Group', posts: '0'},
@@ -66,6 +73,7 @@ export default class ForumModel extends ForumModelInterface {
   openModal(name) {
     this.activeModal = name;
     this.authError = null;
+    this.groupError = null;
     this.notify();
   }
 
@@ -73,6 +81,7 @@ export default class ForumModel extends ForumModelInterface {
   closeModal() {
     this.activeModal = null;
     this.authError = null;
+    this.groupError = null;
     this.notify();
   }
 
@@ -109,6 +118,7 @@ export default class ForumModel extends ForumModelInterface {
     this.currentUser = result.ok ? result.data.user : null;
     this.sessionChecked = true;
     this.notify();
+    if (this.currentUser) this.loadGroups();
   }
   
   async login({email, password}) {
@@ -132,6 +142,7 @@ export default class ForumModel extends ForumModelInterface {
     this.currentUser = result.data.user;
     this.activeModal = null;
     this.notify();
+    this.loadGroups();
     return true;
   }
 
@@ -147,33 +158,14 @@ export default class ForumModel extends ForumModelInterface {
   async logout() {
     await this.request('logout.php', 'POST');
     this.currentUser = null;
+    this.groups = [];
+    this.groupsLoaded = false;
     this.notify();
   }
 
   async findPosts() {
     const result = await this.request('HomeFeed.php', 'POST');
     return result;
-  }
-
-  // Stuff for the homepage
-
-  createEmptyHome() {
-  
-  }
-
-  loadHomeData() {
-  }
-
-  makePlaceHolders(prefix, count) {
-
-  }
-
-  setActiveSelection(selectionId) {
-
-  }
-
-  setSort(value) {
-
   }
 
   addPost(body) {
@@ -193,13 +185,37 @@ export default class ForumModel extends ForumModelInterface {
     return this.profileOptions.slice();
   }
 
-  getMyGroups(){
-    return this.myGroups.slice();
-  }
+  getMyGroups = () => this.groups.filter(group => group.joined).map(group => ({ ...group }));
 
   getTrendingGroups(){
     return this.trendingGroups.slice();
   }
 
+  getGroups = () => this.groups.map(group => ({ ...group }));
   
+  getGroupTypes = () => this.groupTypes.slice();
+
+  async loadGroups() {
+    const result = await this.request('groups.php', 'GET');
+    if (result.ok) this.groups = result.data.groups;
+    this.groupsLoaded = true;
+    this.notify();
+  }
+
+  async createGroup({ name, type }) {
+    const result = await this.request('createGroup.php', 'POST', { name, type });
+    if (!result.ok) {
+      this.groupError = result.error;
+      this.notify();
+      return false;
+    }
+    this.activeModal = null;
+    await this.loadGroups();
+    return true;
+  }
+
+  async joinGroup(groupId) {
+    await this.request('joinGroup.php', 'POST', { groupId });
+    this.loadGroups();
+  }
 }

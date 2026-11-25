@@ -6,4 +6,5 @@
     startSession();
 
     $userId = requireLogin();
+    sendJson(['groups' => fetchGroups($pdo, $userId)]);
 ?>

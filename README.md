@@ -20,13 +20,13 @@
   - [x] Latest posts panel
     - [x] Backend connection
   - [ ] Create post panel
-    - [ ] Backend connection
+    - [X] Backend connection
      
 ### All Groups View
-- [ ] All groups view
-  - [ ] Framework
-  - [ ] Join group
-  - [ ] Backend connection
+- [X] All groups view
+  - [X] Framework
+  - [X] Join group
+  - [X] Backend connection
 
 ### Group Chat View
 - [ ] Group chat view

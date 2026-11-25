@@ -40,7 +40,7 @@ export default class HomeController extends HomeControllerInterface {
     }
 
     startPolling() {
-        this.pollTimer = setInterval(() => this.checkForNewPosts(), 5000);
+        this.pollTimer = setInterval(() => this.checkForNewPosts(), 1000);
     }
 
     stopPolling() {

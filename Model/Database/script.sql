@@ -29,7 +29,8 @@ CREATE TABLE IF NOT EXISTS `users` (
 -- Groups table
 CREATE TABLE IF NOT EXISTS `groups` (
     group_id INT PRIMARY KEY AUTO_INCREMENT,
-    group_name VARCHAR(50) NOT NULL
+    group_name VARCHAR(50) NOT NULL,
+    group_type ENUM('Academic', 'Campus Life', 'Organizations', 'Housing', 'Lifestyle', 'Sports') NULL
 );
 
 -- Posts table

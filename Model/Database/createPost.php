@@ -1,4 +1,5 @@
 <?php
+// Author: Benjamin Nguyen
 require __DIR__ . '/api.php';
 requirePost();
 startSession();

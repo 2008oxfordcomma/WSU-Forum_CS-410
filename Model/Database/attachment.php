@@ -1,4 +1,5 @@
 <?php
+// Author: Benjamin Nguyen
 require __DIR__ . '/api.php';
 startSession();
 if (empty($_SESSION['user_id'])) sendError('Please log in.', 401);

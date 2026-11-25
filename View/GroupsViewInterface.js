@@ -14,11 +14,11 @@ export default class GroupsViewInterface {
         throw new Error('renderFilters() is not implemented');
     }
 
-    renderGroups(groups, joiningGroupId) {
+    renderGroups(groups) {
         throw new Error('renderGroups() is not implemented');
     }
 
-    groupCard(group, joining) {
+    groupCard(group) {
         throw new Error('groupCard() is not implemented');
     }
 

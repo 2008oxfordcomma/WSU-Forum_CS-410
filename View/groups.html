@@ -32,6 +32,42 @@
             </div>
         </div>
     </nav>
+    <main id="groupsPage" class="main-content groups-page" hidden>
+        <div class="groups-page-header">
+            <div>
+                <h1 class="groups-page-title">Groups</h1>
+                <p class="groups-page-subtitle">Explore and join groups that match your interests.</p>
+            </div>
+            <button class="submit-btn create-group-btn" id="createGroupBtn">Create Group</button>
+        </div>
+
+        <!-- currently these are just place holders since I don't know how to get them to work yet -->
+        <input type="search" class="groups-search" id="groupsSearch" placeholder="Search groups...">
+        <div class="group-filters" id="groupFilters"></div>
+
+        <p id="groupsStatus" class="groups-status" hidden></p>
+        <section class="group-grid" id="groupGrid"></section>
+    </main>
+
+    <div id="createGroupModal" class="modal"> <!-- i'm just reusing the same modal I used for login/create account-->
+        <div class="modal-content">
+            <div class="login-body">
+                <div class="modal-logo"></div>
+                <h2>Create Group</h2>
+                <p class="login-subtitle">Start a new group for other WSU students</p>
+                <form id="createGroupForm">
+                    <div class="form-group">
+                        <input type="text" id="groupName" placeholder="Group Name" maxlength="50" required>
+                    </div>
+                    <div class="form-group">
+                        <select id="groupType" required></select> <!-- GroupsView fills in the types -->
+                    </div>
+                    <p id="createGroupError" class="form-error" hidden></p>
+                    <button type="submit" class="submit-btn" id="createGroupSubmit">Create Group</button>
+                </form>
+            </div>
+        </div>
+    </div>
     <script type="module" src="../Controller/GroupsController.js"></script>
 </body>
 </html>

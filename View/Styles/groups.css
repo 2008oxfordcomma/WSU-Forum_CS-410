@@ -1,0 +1,127 @@
+/* Author: Dre Harm
+ * Date: 11/24/26
+ */
+ 
+.groups-page {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    max-width: 1200px;
+}
+ 
+.groups-page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+ 
+.groups-page-title {
+    font-size: 28px;
+}
+ 
+.groups-page-subtitle,
+.groups-status {
+    color: var(--text-secondary);
+    font-size: 14px;
+}
+ 
+.create-group-btn {
+    width: auto;
+    padding: 0.6rem 1.25rem;
+}
+ 
+.groups-search {
+    padding: 0.6rem;
+    border: 2px solid var(--input-border);
+    font-size: 14px;
+}
+ 
+.group-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+ 
+.filter-button {
+    padding: 0.35rem 1rem;
+    border: 2px solid var(--border-color);
+    background: white;
+}
+ 
+.filter-button.active {
+    background: var(--btn-primary);
+    color: white;
+}
+ 
+.group-grid {
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    align-content: start;
+    gap: 1.25rem;
+    padding-right: 0.5rem;
+}
+ 
+.group-tile {
+    border: 2px solid var(--border-color);
+}
+ 
+.group-tile-banner {
+    height: 100px;
+    background: #e5e7eb;
+    border-bottom: 2px solid var(--border-color);
+}
+ 
+.group-tile-icon {
+    width: 56px;
+    height: 56px;
+    margin: -30px 0 0 1rem;
+    border: 2px solid var(--border-color);
+    background: #f3f4f6;
+}
+ 
+.group-tile-body {
+    padding: 0.5rem 1rem 1rem;
+}
+ 
+.group-tile-members {
+    color: var(--text-secondary);
+    font-size: 13px;
+}
+ 
+.group-tile-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1rem;
+}
+ 
+.group-tile-type {
+    padding: 0.2rem 0.6rem;
+    border: 2px solid var(--border-color);
+    font-size: 12px;
+}
+ 
+.join-group-btn {
+    padding: 0.4rem 0.9rem;
+    border: 2px solid var(--border-color);
+    background: var(--btn-primary);
+    color: white;
+}
+
+.join-group-btn.joined {
+    background: white;
+    color: var(--text-primary);
+    cursor: default;
+}
+
+.form-group select {
+    width: 100%;
+    padding: 0.5rem;
+    border: 2px solid var(--input-border);
+    font-size: 14px;
+}

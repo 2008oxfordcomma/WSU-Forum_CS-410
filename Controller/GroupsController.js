@@ -38,6 +38,13 @@ class GroupsController extends GroupsControllerInterface {
             const button = e.target.closest('[data-join-group]');
             if (button) this.model.joinGroup(Number(button.dataset.joinGroup));
         });
+
+        this.view.filters.addEventListener('click', (e) => {
+            if (e.target.tagName === 'BUTTON') this.model.setGroupFilter(e.target.textContent);
+        });
+        
+        // i want the list to update after every letter so we have to trigger the search every time there is a change
+        this.view.search.addEventListener('input', () => this.model.setGroupSearch(this.view.search.value));
     }
 
     render() {

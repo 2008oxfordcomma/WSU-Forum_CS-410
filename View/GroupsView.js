@@ -19,6 +19,7 @@ export default class GroupsView extends GroupsViewInterface {
         this.groupName = document.getElementById('groupName');
         this.groupType = document.getElementById('groupType');
         this.createGroupError = document.getElementById('createGroupError');
+        this.search = document.getElementById('groupsSearch');
     }
 
     render(model) { // largely repurposed from the forum view
@@ -32,9 +33,9 @@ export default class GroupsView extends GroupsViewInterface {
         this.createGroupModal.classList.toggle('open', model.activeModal === 'createGroup');
         this.showError(this.createGroupError, model.activeModal === 'createGroup' ? model.groupError : null);
 
-        this.renderFilters(model.getGroupTypes());
+        this.renderFilters(model.getGroupTypes(), model.groupFilter);
         this.renderStatus(model);
-        this.renderGroups(model.getGroups());
+        this.renderGroups(model.getFilteredGroups());
     }
 
     renderGroupTypeOptions(types) {
@@ -50,14 +51,17 @@ export default class GroupsView extends GroupsViewInterface {
         this.groupType.replaceChildren(...options);
     }
 
-    renderFilters(types) {
-        const buttons = [this.createElement('button', 'filter-button active', 'All')];
-        for (let i = 0; i < types.length; i++) {
-            buttons.push(this.createElement('button', 'filter-button', types[i]));
+    renderFilters(types, activeFilter) {
+        const names = ['All', ...types];
+        const buttons = [];
+        for (let i = 0; i < names.length; i++) {
+            const button = this.createElement('button', 'filter-button', names[i]);
+            if (names[i] === activeFilter) button.classList.add('active');
+            buttons.push(button);
         }
         this.filters.replaceChildren(...buttons);
     }
-
+    
     renderGroups(groups) {
         const cards = [];
         for (let i = 0; i < groups.length; i++) {
@@ -100,6 +104,7 @@ export default class GroupsView extends GroupsViewInterface {
         let message = null;
         if (!model.groupsLoaded) message = 'Loading groups';
         else if (model.getGroups().length === 0) message = 'No groups yet, please create one';
+        else if (model.getFilteredGroups().length === 0) message = 'No groups match the search';
         this.showError(this.status, message);
     }
 

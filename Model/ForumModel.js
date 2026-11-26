@@ -47,6 +47,8 @@ export default class ForumModel extends ForumModelInterface {
     this.groupError = null; // message inside the Create Group popup
     // pulled these from Benjamin's mockup, might be a good idea to outsource these to a config file, so, like Iyengar said, it could be easily changed if given to another institution
     this.groupTypes = ['Academic', 'Campus Life', 'Organizations', 'Housing', 'Lifestyle', 'Sports'];
+    this.groupFilter = 'All';
+    this.groupSearch = '';
 
    this.trendingGroups = [
     {name: 'Trending Group', posts: '0'},
@@ -194,6 +196,20 @@ export default class ForumModel extends ForumModelInterface {
   getGroups = () => this.groups.map(group => ({ ...group }));
   
   getGroupTypes = () => this.groupTypes.slice();
+
+  setGroupFilter(type) {
+    this.groupFilter = type;
+    this.notify();
+  }
+
+  setGroupSearch(text) {
+    this.groupSearch = text.trim().toLowerCase();
+    this.notify();
+  }
+
+  getFilteredGroups() {
+    return this.getGroups().filter(group => (this.groupFilter === 'All' || group.type === this.groupFilter) && group.name.toLowerCase().includes(this.groupSearch));
+  }
 
   async getMajors() {
     const response = await fetch(new URL('./majors.json', import.meta.url));

@@ -36,6 +36,7 @@ class GroupsController extends GroupsControllerInterface {
 
         this.view.grid.addEventListener('click', (e) => { // since the cards keep getting redrawn we just look at the grid to check which join button was clicked
             const button = e.target.closest('[data-join-group]');
+            if (button) this.model.joinGroup(Number(button.dataset.joinGroup));
         });
     }
 

@@ -114,13 +114,26 @@ export default class HomeView extends HomeViewInterface {
 
         const userWhoMessaged = document.createElement("p");
         userWhoMessaged.className = "post-user";
-        userWhoMessaged.textContent = post.fname + " " + post.lname;
+        const posterName = document.createElement("span");
+        posterName.className = "post-user-name";
+        posterName.textContent = post.fname + " " + post.lname;
+        userWhoMessaged.appendChild(posterName);
+        if (post.major) {
+            const majorLabel = document.createElement("span");
+            majorLabel.className = "major-label";
+            majorLabel.textContent = post.major;
+            userWhoMessaged.append(majorLabel);
+        }
         const messageFromUser = document.createElement("p");
         messageFromUser.className = "post-message";
         messageFromUser.textContent = post.message;
         const timeOfMessage = document.createElement("p");
         timeOfMessage.className = "post-time";
-        timeOfMessage.textContent = post.send_time;
+        const sentAt = new Date(post.send_time.replace(' ', 'T') + 'Z');
+        timeOfMessage.textContent = sentAt.toLocaleString('en-US', {
+            timeZone: 'America/Chicago', month: 'short', day: 'numeric', year: 'numeric',
+            hour: 'numeric', minute: '2-digit',
+        });
         
         messageContainer.appendChild(userWhoMessaged);
         messageContainer.appendChild(messageFromUser);

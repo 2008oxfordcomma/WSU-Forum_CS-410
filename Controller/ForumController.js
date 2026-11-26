@@ -21,6 +21,7 @@ class ForumController extends ForumControllerInterface{
     this.model.subscribe(this.view.render.bind(this.view));
     this.view.render(this.model);
     this.model.checkSession(); // asks the server if this browser is already logged in
+    this.model.getMajors().then(majors => this.view.renderMajorOptions(majors));
   }
 
   bindEvents() {

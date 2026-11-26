@@ -18,6 +18,7 @@ CREATE TABLE IF NOT EXISTS `users` (
     user_role ENUM('Student', 'Professor', 'Admin') NOT NULL,
     email VARCHAR(50) NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL,
+    major VARCHAR(100) NULL,
 
     -- Check if email is in expected formatting
     CONSTRAINT chk_email CHECK (

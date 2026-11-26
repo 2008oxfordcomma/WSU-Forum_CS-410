@@ -29,6 +29,7 @@
                     <button class="nav-btn" data-page="about">About</button>
                 </div>
                 <span id="greeting" class="nav-greeting" hidden></span>
+                <span id="majorLabel" class="major-label" hidden></span>
                 <button class="nav-btn login-btn" id="loginBtn">Login / Create Account</button>
             </div>
         </div>
@@ -162,6 +163,10 @@
                                 <input type="radio" name="signupRole" value="professor">Professor</input>
                             </div>
                         </div>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="signupMajor" list="majorOptions" placeholder="Major / Program" required>
+                        <datalist id="majorOptions"></datalist>
                     </div>
                     <div class="form-group">
                         <input type="email" id="signupEmail" placeholder="WSU Email Address" required>

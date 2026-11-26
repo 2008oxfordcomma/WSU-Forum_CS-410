@@ -37,7 +37,7 @@ try {
         $stmt = $pdo->prepare('INSERT INTO dashboard_post_attachments(post_id, filename, mime, contents) VALUES (?, ?, ?, ?)');
         $stmt->execute([$id, $filename, $mime, $bytes]);
     }
-    $stmt = $pdo->prepare('SELECT c.post_id, c.message, c.send_time, u.fname, u.lname FROM posts c JOIN users u ON u.user_id = c.user_id WHERE c.post_id = ?');
+    $stmt = $pdo->prepare('SELECT c.post_id, c.message, c.send_time, u.fname, u.lname, u.major FROM posts c JOIN users u ON u.user_id = c.user_id WHERE c.post_id = ?');
     $stmt->execute([$id]);
     $post = $stmt->fetch();
     $post['filename'] = $filename ?? null;

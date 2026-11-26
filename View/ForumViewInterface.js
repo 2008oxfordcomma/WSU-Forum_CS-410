@@ -22,6 +22,10 @@ export default class ForumViewInterface {
         throw new Error('clearLoginForm() is not implemented');
     }
 
+    renderMajorOptions(majors) {
+        throw new Error('renderMajorOptions() is not implemented');
+    }
+
     clearSignupForm() {
         throw new Error('clearSignupForm() is not implemented');
     }

@@ -32,7 +32,7 @@ export default class ForumModelInterface {
         throw new Error('login() is not implemented');
     }
 
-    signup({ firstName, lastName, role, email, password, confirmPassword }) {
+    signup({ firstName, lastName, role, email, major, password, confirmPassword }) {
         throw new Error('signup() is not implemented');
     }
 
@@ -78,5 +78,9 @@ export default class ForumModelInterface {
 
     getPosts() {
         throw new Error('getPosts() is not implemented');
+    }
+
+    getMajors() {
+        throw new Error('getMajors() is not implemented');
     }
 }

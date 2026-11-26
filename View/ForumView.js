@@ -23,6 +23,8 @@ export default class ForumView extends ForumViewInterface {
     this.guestPage = document.getElementById('guestPage');
     this.homePage = document.getElementById('homePage');
     this.greeting = document.getElementById('greeting');
+    this.majorLabel = document.getElementById('majorLabel');
+    this.majorOptions = document.getElementById('majorOptions');
   }
   
   render(model) {
@@ -42,6 +44,8 @@ export default class ForumView extends ForumViewInterface {
     this.loginBtn.textContent = loggedIn ? 'Log Out' : 'Login / Create Account';
     this.greeting.hidden = !loggedIn;
     this.greeting.textContent = loggedIn ? 'Hello ' + model.currentUser.firstName + '!': '';
+    this.majorLabel.textContent = loggedIn ? model.currentUser.major : '';
+    this.majorLabel.hidden = !this.majorLabel.textContent; // older accounts don't have a major
 
     this.showError(this.loginError, model.activeModal === 'login' ? model.authError : null);
     this.showError(this.signupError, model.activeModal === 'signup' ? model.authError : null);
@@ -49,6 +53,14 @@ export default class ForumView extends ForumViewInterface {
     // when I was testing it out and it was taking a while to load, clicking the submit again would send the form twice, so this stops double-clicking 
     this.loginSubmit.disabled = model.authPending;
     this.signupSubmit.disabled = model.authPending;
+  }
+
+  renderMajorOptions(majors) {
+    for (let i = 0; i < majors.length; i++) {
+      const option = document.createElement('option');
+      option.value = majors[i];
+      this.majorOptions.appendChild(option);
+    }
   }
 
   showError(element, message) {
@@ -70,6 +82,7 @@ export default class ForumView extends ForumViewInterface {
       lastName: document.getElementById('signupLastName').value.trim(),
       role: role ? role.value : 'student',
       email: document.getElementById('signupEmail').value.trim(),
+      major: document.getElementById('signupMajor').value.trim(),
       password: document.getElementById('signupPassword').value,
       confirmPassword: document.getElementById('signupConfirmPassword').value
     };

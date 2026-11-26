@@ -54,12 +54,13 @@ function userToJson($row) {
         'lastName' => $row['lname'],
         'role' => $row['user_role'],
         'email' => $row['email'],
+        'major' => $row['major'],
     ];
 }
 
 // looks up a user by id in the database, should return the row or null a null
 function findUserById($pdo, $userId) {
-    $stmt = $pdo->prepare('SELECT user_id, fname, lname, user_role, email FROM users WHERE user_id = ?');
+    $stmt = $pdo->prepare('SELECT user_id, fname, lname, user_role, email, major FROM users WHERE user_id = ?');
     $stmt->execute([$userId]);
     $row = $stmt->fetch();
     return $row ?: null;

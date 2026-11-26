@@ -16,7 +16,7 @@ if ($email === '' || $password === '') {
 }
 
 // Malcom brought it up in class but when arguing with Prof. Zhang, but the ? keeps whatever a user typed from being an SQL injection
-$stmt = $pdo->prepare('SELECT user_id, fname, lname, user_role, email, password FROM users WHERE email = ?');
+$stmt = $pdo->prepare('SELECT user_id, fname, lname, user_role, email, major, password FROM users WHERE email = ?');
 $stmt->execute([$email]);
 $row = $stmt->fetch();
 

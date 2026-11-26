@@ -360,6 +360,16 @@ button {
   margin-right: 0.75rem;
 }
 
+.major-label {
+  display: inline-block;
+  padding: 0.1rem 0.5rem;
+  margin-right: 0.75rem;
+  border: 2px solid var(--border-color);
+  font-size: 12px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
 .post{
     border: 2px solid var(--border-color);
     margin-left: 3px;
@@ -379,10 +389,21 @@ button {
 .post-user{
   color: var(--text-primary);
   font-size: 20px;
-  text-decoration: underline;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
   text-align: left;
   margin-bottom:8px;
   margin-left: 10px;
+}
+
+.post-user-name {
+  text-decoration: underline;
+}
+
+
+.post-user .major-label {
+  border: 1px solid var(--border-color);
 }
 
 .post-message{

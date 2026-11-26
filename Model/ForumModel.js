@@ -146,13 +146,13 @@ export default class ForumModel extends ForumModelInterface {
     return true;
   }
 
-  signup({firstName, lastName, role, email, password, confirmPassword}) {
+  signup({firstName, lastName, role, email, major, password, confirmPassword}) {
     if (password !== confirmPassword) {
       this.authError = "The passwords don't match";
       this.notify();
       return false;
     }
-    return this.sendAccountRequest('signup.php', {firstName, lastName, role, email, password, confirmPassword});
+    return this.sendAccountRequest('signup.php', {firstName, lastName, role, email, major, password, confirmPassword});
   }
 
   async logout() {
@@ -194,6 +194,11 @@ export default class ForumModel extends ForumModelInterface {
   getGroups = () => this.groups.map(group => ({ ...group }));
   
   getGroupTypes = () => this.groupTypes.slice();
+
+  async getMajors() {
+    const response = await fetch(new URL('./majors.json', import.meta.url));
+    return response.json();
+  }
 
   async loadGroups() {
     const result = await this.request('groups.php', 'GET');

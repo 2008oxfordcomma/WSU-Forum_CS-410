@@ -8,6 +8,7 @@ export default class GroupsView extends GroupsViewInterface {
         super();
         this.page = document.getElementById('groupsPage');
         this.greeting = document.getElementById('greeting');
+        this.majorLabel = document.getElementById('majorLabel');
         this.logoutBtn = document.getElementById('logoutBtn');
         this.createGroupBtn = document.getElementById('createGroupBtn');
         this.filters = document.getElementById('groupFilters');
@@ -25,6 +26,8 @@ export default class GroupsView extends GroupsViewInterface {
         this.page.hidden = !loggedIn;
         this.greeting.hidden = !loggedIn;
         this.greeting.textContent = loggedIn ? 'Hello ' + model.currentUser.firstName + '!' : '';
+        this.majorLabel.textContent = loggedIn ? model.currentUser.major : '';
+        this.majorLabel.hidden = !this.majorLabel.textContent;
 
         this.createGroupModal.classList.toggle('open', model.activeModal === 'createGroup');
         this.showError(this.createGroupError, model.activeModal === 'createGroup' ? model.groupError : null);

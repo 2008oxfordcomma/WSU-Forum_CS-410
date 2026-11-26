@@ -18,6 +18,7 @@ $role = strtolower(trim($data['role'] ?? ''));
 $email = strtolower(trim($data['email'] ?? ''));
 $password = $data['password'] ?? '';
 $confirmPassword = $data['confirmPassword'] ?? '';
+$major = $data['major'] ?? '';
 
 if ($firstName === '' || $lastName === '') {
     sendError('Please enter your first and last name');
@@ -37,6 +38,11 @@ if (strlen($email) > 50 || !filter_var($email, FILTER_VALIDATE_EMAIL) || !preg_m
     sendError('Please use your WSU email (first.last@go.winona.edu or first.last@winona.edu)');
 }
 
+$majors = json_decode(file_get_contents(__DIR__ . '/../majors.json'), true);
+if (!in_array($major, $majors, true)) {
+    sendError('Please pick your major/program from the list');
+}
+
 if (strlen($password) < 8) {
     sendError('Your password needs to be at least 8 characters');
 }
@@ -48,9 +54,9 @@ $hash = password_hash($password, PASSWORD_DEFAULT);
 
 try {
     $stmt = $pdo->prepare(
-        'INSERT INTO users (fname, lname, user_role, email, password) VALUES (?, ?, ?, ?, ?)'
+        'INSERT INTO users (fname, lname, user_role, email, password, major) VALUES (?, ?, ?, ?, ?, ?)'
     );
-    $stmt->execute([$firstName, $lastName, $allowedRoles[$role], $email, $hash]);
+    $stmt->execute([$firstName, $lastName, $allowedRoles[$role], $email, $hash, $major]);
 } catch (PDOException $e) {
     if ($e->getCode() === '23000') {
         sendError('There is already an account with that email, try logging in instead', 409);

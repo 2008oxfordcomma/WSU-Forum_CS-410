@@ -86,8 +86,8 @@ export default class HomeController extends HomeControllerInterface {
         const file = this.form.elements.attachment.files[0];
         const count = (message.value.match(/\S+/gu) || []).length;
         document.getElementById('wordCount').textContent = count + ' / 500 words';
-        const invalidFile = file && (file.size === 0 || file.size > 2097152);
-        this.form.elements.attachment.setCustomValidity(invalidFile ? 'Choose a nonempty file up to 2 MB.' : '');
+        const invalidFile = file && (file.size === 0 || file.size > 10485760);
+        this.form.elements.attachment.setCustomValidity(invalidFile ? 'Choose a nonempty file up to 10 MB.' : '');
         this.form.querySelector('button').disabled = this.busy || !this.owner || count > 500 || (!count && !file);
         message.disabled = this.form.elements.attachment.disabled = Boolean(this.busy);
     }

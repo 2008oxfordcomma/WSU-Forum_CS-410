@@ -223,8 +223,14 @@ export default class ForumModel extends ForumModelInterface {
     this.notify();
   }
 
-  async createGroup({ name, type }) {
-    const result = await this.request('createGroup.php', 'POST', { name, type });
+  async createGroup({ name, type, icon, banner }) {
+    // as mentioned in createGroup.php, i had to convert from JSON to FormData
+    const form = new FormData();
+    form.append('name', name);
+    form.append('type', type);
+    if (icon) form.append('icon', icon);
+    if (banner) form.append('banner', banner);
+    const result = await this.request('createGroup.php', 'POST', form);
     if (!result.ok) {
       this.groupError = result.error;
       this.notify();

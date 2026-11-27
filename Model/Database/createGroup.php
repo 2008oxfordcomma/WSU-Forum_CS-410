@@ -8,9 +8,11 @@
 
     $userId = requireLogin();
 
-    $data = readJsonBody();
-    $name = trim($data['name'] ?? '');
-    $type = $data['type'] ?? '';
+    // i had to use FormData instead of JSON since it can have files
+    $name = trim($_POST['name'] ?? '');
+    $type = $_POST['type'] ?? '';
+    $icon = readImage('icon');
+    $banner = readImage('banner');
 
     // the form checks these too, but technically anyone can send requests straight to this file
     if ($name === '') sendError('The group must have a name');
@@ -31,6 +33,10 @@
 
         $stmt = $pdo->prepare('INSERT INTO user_groups (user_id, group_id) VALUES (?, ?)');
         $stmt->execute([$userId, $groupId]);
+
+        $stmt = $pdo->prepare('INSERT INTO group_images (group_id, kind, mime, contents) VALUES (?, ?, ?, ?)');
+        if ($icon) $stmt->execute([$groupId, 'icon', $icon['mime'], $icon['contents']]);
+        if ($banner) $stmt->execute([$groupId, 'banner', $banner['mime'], $banner['contents']]);
         $pdo->commit();
     } catch (PDOException $e) {
         error_log('createGroup.php: ' . $e->getMessage());

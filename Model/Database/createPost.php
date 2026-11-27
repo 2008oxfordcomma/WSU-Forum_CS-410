@@ -15,8 +15,8 @@ $file = $_FILES['attachment'] ?? null;
 $attached = $file && $file['error'] !== UPLOAD_ERR_NO_FILE;
 if (!$words && !$attached) sendError('Write a post or select an attachment.');
 if ($attached) {
-    if ($file['error'] !== UPLOAD_ERR_OK || $file['size'] > 2097152 || !$file['size']) {
-        sendError('Choose a nonempty file up to 2 MB.');
+    if ($file['error'] !== UPLOAD_ERR_OK || $file['size'] > 10485760 || !$file['size']) {
+        sendError('Choose a nonempty file up to 10 MB.');
     }
     $mime = (new finfo(FILEINFO_MIME_TYPE))->file($file['tmp_name']);
     if (!in_array($mime, ['image/png', 'image/jpeg', 'image/gif', 'image/webp', 'application/pdf', 'text/plain'], true)) {

@@ -77,6 +77,17 @@ CREATE TABLE IF NOT EXISTS `user_groups` (
     FOREIGN KEY(group_id) REFERENCES `groups`(group_id) 
 );
 
+-- pretty much copied what Benjamin made for the post attachments
+CREATE TABLE IF NOT EXISTS `group_images` (
+    group_id INT,
+    kind ENUM('icon', 'banner'),
+    mime VARCHAR(80) NOT NULL,
+    contents MEDIUMBLOB NOT NULL,
+
+    PRIMARY KEY(group_id, kind),
+    FOREIGN KEY(group_id) REFERENCES `groups`(group_id) ON DELETE CASCADE
+);
+
 -- User saves posts
 CREATE TABLE IF NOT EXISTS `user_saves` (
     user_id INT,

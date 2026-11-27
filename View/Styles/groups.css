@@ -83,6 +83,12 @@
     border: 2px solid var(--border-color);
     background: #f3f4f6;
 }
+
+.group-tile-banner,
+.group-tile-icon {
+    background-size: cover;
+    background-position: center;
+}
  
 .group-tile-body {
     padding: 0.5rem 1rem 1rem;

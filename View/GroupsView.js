@@ -18,6 +18,8 @@ export default class GroupsView extends GroupsViewInterface {
         this.createGroupForm = document.getElementById('createGroupForm');
         this.groupName = document.getElementById('groupName');
         this.groupType = document.getElementById('groupType');
+        this.groupIcon = document.getElementById('groupIcon');
+        this.groupBanner = document.getElementById('groupBanner');
         this.createGroupError = document.getElementById('createGroupError');
         this.search = document.getElementById('groupsSearch');
     }
@@ -72,10 +74,12 @@ export default class GroupsView extends GroupsViewInterface {
 
     groupCard(group) {
         const card = this.createElement('article', 'group-tile');
-
-        // Benjamin's mockup had pictures and an icon, but I don't know how we are going to assign or set these
-        card.appendChild(this.createElement('div', 'group-tile-banner')); // for the picture
-        card.appendChild(this.createElement('div', 'group-tile-icon')); // for the group's icon
+        const banner = this.createElement('div', 'group-tile-banner');
+        const icon = this.createElement('div', 'group-tile-icon');
+        if (group.hasBanner) banner.style.backgroundImage = `url("${this.groupImageUrl(group.id, 'banner')}")`;
+        if (group.hasIcon) icon.style.backgroundImage = `url("${this.groupImageUrl(group.id, 'icon')}")`;
+        card.appendChild(banner);
+        card.appendChild(icon);
 
         const body = this.createElement('div', 'group-tile-body');
         body.appendChild(this.createElement('h3', 'group-tile-name', group.name));
@@ -116,9 +120,13 @@ export default class GroupsView extends GroupsViewInterface {
     getCreateGroupFormData() {
         return {
             name: this.groupName.value.trim(),
-            type: this.groupType.value
+            type: this.groupType.value,
+            icon: this.groupIcon.files[0],
+            banner: this.groupBanner.files[0]
         };
     }
+
+    groupImageUrl = (groupId, kind) => new URL(`../Model/Database/groupImage.php?group=${groupId}&kind=${kind}`, import.meta.url);
 
     clearCreateGroupForm = () => this.createGroupForm.reset();
     
